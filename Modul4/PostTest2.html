@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Penjualan</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 20px;
+        display: flex;  
+      }
+      table,
+      td,
+      th {
+        border: 1px solid black;
+        padding: 8px;
+      }
+      input[type="text"] {
+        width: 100%;
+      }
+      button {
+        padding : 10px 20px;
+      }
+      #nota{
+        margin-left: 15px;
+      }
+    </style>
+    <script>
+      function hitung() {
+        const kode = document.getElementById("kode").value;
+        const jumlahBeli =
+          parseInt(document.getElementById("jmlhBeli").value) || 0;
+
+        let Nama;
+        let Harga;
+        let persenPotongan = 0;
+
+        switch (kode) {
+          case "1":
+            Nama = "Buku";
+            Harga = 5000;
+            break;
+          case "2":
+            Nama = "Penggaris";
+            Harga = 1500;
+            break;
+          case "3":
+            Nama = "Pulpen";
+            Harga = 2000;
+            break;
+          default:
+            Nama = "";
+            Harga = 0;
+        }
+
+        if (jumlahBeli <= 10) {
+          persenPotongan = 0.05;
+        } else if (jumlahBeli <= 20) {
+          persenPotongan = 0.1;
+        } else {
+          persenPotongan = 0.15;
+        }
+
+        jmlhBayar = Harga * jumlahBeli;
+        Potongan = persenPotongan * jmlhBayar;
+        totalBayar = jmlhBayar - Potongan;
+
+        document.getElementById("namaBarang").value = Nama;
+        document.getElementById("Harga").value = "Rp. " +Harga;
+        document.getElementById("Potongan").value = persenPotongan * 100;
+        document.getElementById("potongan").value = "Rp. " +Potongan;
+        document.getElementById("totalBayar").value = "Rp. " +totalBayar;
+        document.getElementById("jmlhBayar").value = "Rp. " +jmlhBayar;
+        
+      }
+
+      function tampilkan(){
+        const kode = document.getElementById("kode").value;
+        const Nama = document.getElementById("namaBarang").value;
+        const Harga = document.getElementById("Harga").value;
+        const jumlahBeli = parseInt(document.getElementById("jmlhBeli").value) || 0;
+        const jmlhBayar = document.getElementById("jmlhBayar").value;
+        const Potongan = document.getElementById("potongan").value;
+        const totalBayar = document.getElementById("totalBayar").value;
+
+        const notaContent = `
+          <h2>Nota Penjualan</h2>
+          <p>Kode Barang   : ${kode}</p>
+          <p>Nama Barang   : ${Nama}</p>
+          <p>Harga Barang  : ${Harga}</p>
+          <p>Jumlah Beli   : ${jumlahBeli}</p>
+          <p>============================</p>
+          <p>Jumlah Bayar  : ${jmlhBayar}</p>
+          <p>Potongan      : ${Potongan}</p>
+          <p>============================</p>
+          <p>Total Bayar   : ${totalBayar}</p>
+        `;
+        
+        document.getElementById("nota").innerHTML = notaContent;
+
+      }
+      function clearForm() {
+        document.forms["form2"].reset();
+        document.getElementById("nota").innerHTML = "";
+      }
+    </script>
+  </head>
+  <body>
+    <form name="form2">
+      <table>
+        <tr>
+          <td colspan="2" align="center">Data Penjualan Barang</td>
+        </tr>
+        <tr>
+          <td>Kode</td>
+          <td>
+            <select id="kode" onchange="hitung()">
+              <option value="pilih" selected>-- Pilih Salah Satu --</option>
+              <option value="1">B001</option>
+              <option value="2">B002</option>
+              <option value="3">B003</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Jumlah Beli</td>
+          <td><input type="text" id="jmlhBeli" oninput="hitung()"></td>
+        </tr>
+        <tr>
+          <td>Nama Barang</td>
+          <td><input type="text" id="namaBarang" readonly /></td>
+        </tr>
+        <tr>
+          <td>Harga</td>
+          <td><input type="text" id="Harga" readonly /></td>
+        </tr>
+        <tr>
+          <td>Jumlah Bayar</td>
+          <td><input type="text" id="jmlhBayar" readonly /></td>
+        </tr>
+        <tr>
+          <td>
+            Potongan
+            <input type="text" id="Potongan" readonly style="width: 20%" />%
+          </td>
+          <td><input type="text" id="potongan" readonly /></td>
+        </tr>
+        <tr>
+          <td>Total Bayar</td>
+          <td><input type="text" id="totalBayar" readonly /></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <button type="button" onclick="tampilkan()">Tampilkan</button>
+                <button type="button" onclick="clearForm()">Clear</button>
+            </td>
+        </tr>
+      </table>
+    </form>
+    <div id="nota"></div>
+  </body>
+</html>

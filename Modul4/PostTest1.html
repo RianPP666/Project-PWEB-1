@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perhitungan Gaji</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 20px;
+        }
+        table, td, th {
+            border: 1px solid black;
+            padding: 8px;
+        }
+        input[type="text"] {
+            width: 100%;
+        }
+    </style>
+    <script>
+        function hit() {
+            // Ambil nilai golongan dan jumlah anak dari form
+            const golongan = document.getElementById("golongan").value;
+            const jumlahAnak = parseInt(document.getElementById("jumlahAnak").value) || 0;
+
+            // Variabel untuk menyimpan gaji pokok dan persen tunjangan
+            let gajiPokok = 0;
+            let persenTunjangan = 0;
+
+            // Tentukan gaji pokok dan persen tunjangan berdasarkan golongan
+            switch (golongan) {
+                case "1":
+                    gajiPokok = 250000;
+                    persenTunjangan = 0.05;
+                    break;
+                case "2":
+                    gajiPokok = 300000;
+                    persenTunjangan = 0.10;
+                    break;
+                case "3":
+                    gajiPokok = 350000;
+                    persenTunjangan = 0.15;
+                    break;
+                default:
+                    alert("Golongan tidak valid!");
+                    return;
+            }
+
+            // Hitung tunjangan dan gaji bersih
+            const tunjangan = (jumlahAnak * gajiPokok) * persenTunjangan;
+            const gajiBersih = gajiPokok + tunjangan;
+
+            // Tampilkan hasil di form
+            document.getElementById("gajiPokok").value = gajiPokok.toLocaleString();
+            document.getElementById("tunjangan").value = tunjangan.toLocaleString();
+            document.getElementById("gajiBersih").value = gajiBersih.toLocaleString();
+        }
+    </script>
+</head>
+<body>
+
+    <form id="formGaji" name="form1">
+        <table>
+            <tr>
+                <th colspan="2">PERHITUNGAN GAJI</th>
+            </tr>
+            <tr>
+                <td>Golongan</td>
+                <td>
+                    <select id="golongan" name="gol">
+                        <option value="1">I</option>
+                        <option value="2">II</option>
+                        <option value="3">III</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Jumlah Anak</td>
+                <td><input type="number" id="jumlahAnak" name="anak" size="10" maxlength="10" placeholder="Masukkan jumlah anak" ></td>
+            </tr>
+            <tr>
+                <td><button type="button" name="hitung" value="Hitung" onclick="hit()">Hitung</button></td>
+                <td><button type="reset" name="Batal" value="Cancel" >Cancel</button></td>
+            </tr>
+            <tr>
+                <td>Gaji Pokok</td>
+                <td><input type="text" id="gajiPokok" name="gapok" readonly></td>
+            </tr>
+            <tr>
+                <td>Tunjangan</td>
+                <td><input type="text" id="tunjangan" name="tunjangan" readonly></td>
+            </tr>
+            <tr>
+                <td>Gaji Bersih</td>
+                <td><input type="text" id="gajiBersih" name="gaji" readonly></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
