@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubah Isi dengan jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="fakultas">fkom</div>
+    <br>
+    <input type="text" id="university" value="Uniku" readonly>
+    <br><br>
+    <button id="ubahButton">Ubah Isi</button>
+
+    <script>
+        $(document).ready(function(){
+
+            $("#ubahButton").click(function(){
+
+                $("#fakultas").text("Fakultas Ilmu Komputer");
+                
+                $("#university").val("Universitas Kuningan");
+            });
+        });
+    </script>
+</body>
+</html>

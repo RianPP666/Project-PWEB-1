@@ -7,76 +7,84 @@
     <title>Form Pemesanan</title>
     <script>
       function updateHarga() {
-          const tipeKamar = document.getElementById("tipeKamar").value;
-          let harga = 0;
+        const tipeKamar = document.getElementById("tipeKamar").value;
+        let harga = 0;
 
-          switch (tipeKamar) {
-              case "1":
-                  harga = 200000;
-                  break;
-              case "2":
-                  harga = 250000;
-                  break;
-              case "3":
-                  harga = 300000;
-                  break;
-              default:
-                  harga = 0;
-                  break;
-          }
-          document.getElementById("harga").value = harga;
+        switch (tipeKamar) {
+          case "1":
+            harga = 200000;
+            break;
+          case "2":
+            harga = 250000;
+            break;
+          case "3":
+            harga = 300000;
+            break;
+          default:
+            harga = 0;
+            break;
+        }
+        document.getElementById("harga").value = harga;
       }
 
       function simpan() {
-          const durasiField = document.getElementById("durasimenginap");
-          const nomorIDField = document.getElementById("NomorID");
-          const durasi = parseInt(durasiField.value);
-          const breakfast = document.getElementById("termasukBreakfast").checked;
-          let harga = parseInt(document.getElementById("harga").value);
-          let totalBayar = 0;
-          let diskon = 0;
+        const durasiField = document.getElementById("durasimenginap");
+        const nomorIDField = document.getElementById("NomorID");
+        const durasi = parseInt(durasiField.value);
+        const breakfast = document.getElementById("termasukBreakfast").checked;
+        let harga = parseInt(document.getElementById("harga").value);
+        let totalBayar = 0;
+        let diskon = 0;
+        let diskonText = "Tidak ada diskon";
 
-          if (nomorIDField.value.length !== 16) {
-              alert("Isian salah, nomor identitas harus 16 digit");
-              return;
-          }
+        if (nomorIDField.value.length !== 16) {
+          alert("Isian salah, nomor identitas harus 16 digit");
+          return;
+        }
 
-          if (isNaN(durasi)) {
-              alert("Isian salah, durasi menginap harus angka");
-              return;
-          }
+        if (isNaN(durasi)) {
+          alert("Isian salah, durasi menginap harus angka");
+          return;
+        }
 
-          if (breakfast) {
-              harga += 80000;
-          }
+        if (breakfast) {
+          harga += 80000;
+        }
 
-          totalBayar = harga * durasi;
+        totalBayar = harga * durasi;
 
-          if (durasi > 3) {
-              diskon = 0.10;
-              totalBayar = totalBayar - (totalBayar * diskon);
-          }
+        if (durasi > 3) {
+          diskon = 0.10;
+          totalBayar = totalBayar - totalBayar * diskon;
+          diskonText = "10%";
+        }
 
-          document.getElementById("totalBayar").value = totalBayar;
+        document.getElementById("totalBayar").value = totalBayar;
 
-          const idPesan = document.getElementById("IdPesan").value;
-          const nama = document.getElementById("Nama").value;
-          const tipeKamarText = document.getElementById("tipeKamar").options[document.getElementById("tipeKamar").selectedIndex].text;
-          const tanggalPesan = document.getElementById("tanggalpesan").value;
-          const breakfastText = breakfast ? "Ya" : "Tidak";
+        const nama = document.getElementById("Nama").value;
+        const nomorIdentitas = document.getElementById("NomorID").value;
+        const jenisKelamin = document.querySelector(
+          'input[name="jenisKelamin"]:checked'
+        ).value;
+        const tipeKamarText = document.getElementById("tipeKamar").options[
+          document.getElementById("tipeKamar").selectedIndex
+        ].text;
+        const tanggalPesan = document.getElementById("tanggalpesan").value;
+        const breakfastText = breakfast ? "Ya" : "Tidak";
 
-          const notaContent = `
-              <h2>Nota Pemesanan</h2>
-              <p>Id Pemesan       : ${idPesan}</p>
-              <p>Nama Pemesan     : ${nama}</p>
-              <p>Tipe Kamar       : ${tipeKamarText}</p>
-              <p>Harga per Hari   : Rp ${harga}</p>
-              <p>Durasi Menginap  : ${durasi} hari</p>
-              <p>Termasuk Breakfast: ${breakfastText}</p>
-              <p>Total Bayar      : Rp ${totalBayar}</p>
-          `;
+        const notaContent = `
+          <h2>Nota Pemesanan</h2>
+          <p>Nama Pemesan        : ${nama}</p>
+          <p>Jenis Kelamin       : ${jenisKelamin}</p>
+          <p>Nomor Identitas     : ${nomorIdentitas}</p>
+          <p>Tipe Kamar          : ${tipeKamarText}</p>
+          <p>Durasi Menginap     : ${durasi} hari</p>
+          <p>Termasuk Breakfast  : ${breakfastText}</p>
+          <p>Diskon              : ${diskonText}</p>
+          <p>Total Bayar         : Rp ${totalBayar}</p>
+        `;
 
-          document.getElementById("nota").innerHTML = notaContent;
+        document.getElementById("nota").innerHTML = notaContent;
       }
     </script>
   </head>
@@ -101,35 +109,20 @@
             <tr>
               <td><label for="jenisKelamin">Jenis Kelamin : </label></td>
               <td>
-                <input type="radio" name="jenisKelamin" value="Laki-Laki" />Laki
-                Laki
-                <input
-                  type="radio"
-                  name="jenisKelamin"
-                  value="Perempuan"
-                />Perempuan
+                <input type="radio" name="jenisKelamin" value="Laki-Laki" />Laki-Laki
+                <input type="radio" name="jenisKelamin" value="Perempuan" />Perempuan
               </td>
             </tr>
             <tr>
               <td><label for="nomoridentitas">Nomor Identitas : </label></td>
               <td>
-                <input
-                  type="number"
-                  id="NomorID"
-                  name="NomorID"
-                  maxlength="16"
-                  required
-                />
+                <input type="number" id="NomorID" name="NomorID" maxlength="16" required />
               </td>
             </tr>
             <tr>
               <td><label for="pilihan">Tipe Kamar : </label></td>
               <td>
-                <select
-                  name="Tipe Kamar"
-                  id="tipeKamar"
-                  onchange="updateHarga()"
-                >
+                <select name="Tipe Kamar" id="tipeKamar" onchange="updateHarga()">
                   <option value="-" selected>--Pilih--</option>
                   <option value="1">STANDAR</option>
                   <option value="2">DELUXE</option>
@@ -144,42 +137,24 @@
             <tr>
               <td><label for="tanggalpesan">Tanggal Pesan : </label></td>
               <td>
-                <input
-                  type="date"
-                  id="tanggalpesan"
-                  name="tanggalpesan"
-                  onchange="formatTanggal()"
-                  required
-                />
+                <input type="date" id="tanggalpesan" name="tanggalpesan" required />
               </td>
             </tr>
             <tr>
               <td><label for="durasimenginap">Durasi Menginap : </label></td>
               <td>
-                <input
-                  type="number"
-                  id="durasimenginap"
-                  name="durasimenginap"
-                  required
-                />
+                <input type="number" id="durasimenginap" name="durasimenginap" required />
               </td>
               <td>Hari</td>
             </tr>
             <tr>
-              <td>
-                <label for="termasukBreakfast">Termasuk Breakfast : </label>
-              </td>
+              <td><label for="termasukBreakfast">Termasuk Breakfast : </label></td>
               <td><input type="checkbox" id="termasukBreakfast" />Ya</td>
             </tr>
             <tr>
               <td><label for="totalBayar">Total Bayar : </label></td>
               <td>
-                <input
-                  type="number"
-                  id="totalBayar"
-                  name="totalBayar"
-                  readonly
-                />
+                <input type="number" id="totalBayar" name="totalBayar" readonly />
               </td>
             </tr>
           </table>
@@ -189,6 +164,8 @@
           </div>
         </form>
       </div>
+      
     </div>
+    <div id="nota"></div>
   </body>
 </html>

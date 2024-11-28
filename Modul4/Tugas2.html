@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Style/StyleTugas2.css">
+    <title>Form Hotel</title>
+    <script>
+        function Validasi() {
+            // Mengambil nilai dari setiap input
+            const idKamar = document.querySelector('input[name="IdKamar"]:checked');
+            const jenisKamar = document.querySelector('select[name="Tipe Kamar"]').value;
+            const harga = document.getElementById("Harga").value;
+            const fasilitas = document.querySelector('input[name="Fasilitas"]:checked');
+            const nama = document.getElementById("Nama").value;
+
+            // Validasi Id Kamar
+            if (!idKamar) {
+                alert("Silakan pilih Id Kamar");
+                return false;
+            }
+
+            // Validasi Jenis Kamar
+            if (jenisKamar === "-") {
+                alert("Silakan pilih Jenis Kamar");
+                return false;
+            }
+
+            // Validasi Harga (pastikan harga tidak kosong)
+            if (harga.trim() === "" || harga === "0") {
+                alert("Harga tidak boleh kosong, silakan pilih Jenis Kamar yang valid");
+                return false;
+            }
+
+            // Validasi Fasilitas
+            if (!fasilitas) {
+                alert("Silakan pilih Fasilitas");
+                return false;
+            }
+
+            // Validasi Nama
+            if (nama.trim() === "") {
+                alert("Silakan masukkan Nama");
+                return false;
+            }
+
+            // Jika semua validasi lolos
+            return true;
+        }
+
+        function updateHarga() {
+            const tipeKamar = document.getElementById("tipeKamar").value;
+            let harga = 0;
+
+            switch (tipeKamar) {
+              case "1":
+                harga = 200000;
+                break;
+              case "2":
+                harga = 250000;
+                break;
+              case "3":
+                harga = 300000;
+                break;
+              default:
+                harga = 0;
+                break;
+            }
+            document.getElementById("Harga").value = harga;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-container">
+            <h2>Input Data Kamar</h2>
+        </div>
+        <div class="main-container">
+            <form method="get" onsubmit="return Validasi()">
+                <table border="0">
+                    <tr>
+                        <td><label for="IdKamar">Id Kamar : </label></td>
+                        <td colspan="3">
+                            <input type="radio" id="IdKamar" name="IdKamar" value="1">1
+                            <input type="radio" id="IdKamar" name="IdKamar" value="2">2
+                            <input type="radio" id="IdKamar" name="IdKamar" value="3">3
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="GambarRuangan">Gambar Ruangan : </label></td>
+                        <td>
+                            <img src="Image/Kamar1.jpg" alt="Kamar1" width="100px" height="100px">
+                        </td>
+                        <td>
+                            <img src="Image/Kamar2.jpg" alt="Kamar2" width="100" height="100px">
+                        </td>
+                        <td>
+                            <img src="Image/Kamar3.jpg" alt="Kamar3" width="100" height="100px">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="JenisKamar">Jenis Kamar : </label></td>
+                        <td colspan="3">
+                            <select name="Tipe Kamar" id="tipeKamar" onchange="updateHarga()">
+                                <option value="-" selected>--Pilih--</option>
+                                <option value="1">STANDAR</option>
+                                <option value="2">DELUXE</option>
+                                <option value="3">FAMILY</option>
+                              </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="Harga">Harga : </label></td>
+                        <td colspan="3">
+                            <input type="text" id="Harga" name="harga" readonly> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="Fasilitas">Fasilitas : </label></td>
+                        <td>
+                            <input type="radio" id="Fasilitas" name="Fasilitas" value="1">1
+                            <input type="radio" id="Fasilitas" name="Fasilitas" value="2">2
+                            <input type="radio" id="Fasilitas" name="Fasilitas" value="3">3
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="Nama">Nama : </label></td>
+                        <td>
+                            <input type="text" name="Nama" id="Nama" required>
+                        </td>
+                    </tr>
+                </table>
+                <div class="button">
+                    <button type="submit" class="Simpan">Simpan</button>
+                    <button type="reset" class="Cancel">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+
+    <div class="Tabel">
+        <div class="header-tabel">
+            <h2>Daftar Fasilitas</h2>
+        </div>
+        <div class="menu-tabel">
+            <table border="1">
+                <tr>
+                    <td>Id</td>
+                    <td>Nama</td>
+                    <td>Fasilitas</td>
+                    <td>Harga Weekend</td>
+                    <td>Harga Weekday</td>
+                    <td>kuota</td>
+                    <td>Jam Buka</td>
+                    <td>Jam Tutup</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Pre1</td>
+                    <td>Gym, Breakfast, Kolam Renang</td>
+                    <td>Rp. 300.000</td>
+                    <td>Rp. 250.000</td>
+                    <td>10</td>
+                    <td>06.00</td>
+                    <td>00.00</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Pre2</td>
+                    <td>Gym, Breakfast</td>
+                    <td>Rp. 100.000</td>
+                    <td>Rp. 50.000</td>
+                    <td>20</td>
+                    <td>06.00</td>
+                    <td>00.00</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Pre3</td>
+                    <td>Kolam Renang</td>
+                    <td>Rp. 100.000</td>
+                    <td>Rp. 80.000</td>
+                    <td>5</td>
+                    <td>06.00</td>
+                    <td>00.00</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
