@@ -1,0 +1,60 @@
+body{
+    display: flex;
+    justify-content: space-evenly;
+    height: 85vh;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.header-container{
+    display: flex;
+    justify-content: center;
+}
+
+.container{
+    width: 500px;
+    height: 500px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0px 0px 20px rgba(30, 42, 219, 0.5);
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+td{
+    padding: 5px;
+}
+
+.button{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+button{
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+button.Simpan{
+    background-color: rgb(66, 66, 137);
+}
+
+button.Cancel{
+    background-color: rgb(196, 196, 84);
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+selecet{
+    padding: 4px;
+    width: 95%;
+}
