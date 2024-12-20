@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/Style1.css">
+    <title>Kelola Fasilitas</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header-container">
+            <h2>Input Data Fasilitas</h2>
+        </div>
+        <div class="main-container">
+            <form method="post" enctype="multipart/form-data">
+                <table border="0">
+                    <tr>
+                        <td><label for="Id">Id Fasilitas</label></td>
+                        <td>
+                            <input type="text" id="Id" name="Id" placeholder="Masukkan Id" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="Nama">Nama</label></td>
+                        <td>
+                            <input type="text" id="Nama" name="Nama" placeholder="Masukkan Nama" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="Fasilitas">Fasilitas</label></td>
+                        <td>
+                            <input type="radio" id="Pre1" name="Fasilitas" value="Pre1" required> Pre1
+                            <input type="radio" id="Pre2" name="Fasilitas" value="Pre2"> Pre2
+                            <input type="radio" id="Pre3" name="Fasilitas" value="Pre3"> Pre3
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="HargaWeekend">Harga Weekend</label></td>
+                        <td>
+                            <input type="number" id="HargaWeekend" name="HargaWeekend" placeholder="Masukkan Harga Weekend" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="HargaWeekday">Harga Weekday</label></td>
+                        <td>
+                            <input type="number" id="HargaWeekday" name="HargaWeekday" placeholder="Masukkan Harga Weekday" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="Kuota">Kuota</label></td>
+                        <td>
+                            <input type="number" id="Kuota" name="Kuota" placeholder="Masukkan Kuota" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="JamBuka">Jam Buka</label></td>
+                        <td>
+                            <input type="time" id="JamBuka" name="JamBuka" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="JamTutup">Jam Tutup</label></td>
+                        <td>
+                            <input type="time" id="JamTutup" name="JamTutup" required>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- Tombol Simpan dan Batal -->
+                <div class="button">
+                    <button type="submit" class="Simpan">Simpan</button>
+                    <button type="reset" class="Cancel">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

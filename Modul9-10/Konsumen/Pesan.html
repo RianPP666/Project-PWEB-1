@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/Style2.css" />
+    <title>Form Pemesanan</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        // Update harga berdasarkan tipe kamar
+        $("#tipeKamar").change(function () {
+          const tipeKamar = $(this).val();
+          let harga = 0;
+
+          switch (tipeKamar) {
+            case "1":
+              harga = 200000;
+              break;
+            case "2":
+              harga = 250000;
+              break;
+            case "3":
+              harga = 300000;
+              break;
+            default:
+              harga = 0;
+          }
+          $("#harga").val(harga);
+        });
+
+        // Simpan data dan tampilkan nota
+        $(".Simpan").click(function (e) {
+          e.preventDefault(); // Mencegah form submit default
+
+          const nomorIdentitas = $("#NomorID").val();
+          const durasi = parseInt($("#durasimenginap").val());
+          const harga = parseInt($("#harga").val()) || 0;
+          const breakfast = $("#termasukBreakfast").is(":checked");
+          let totalBayar = 0;
+          let diskon = 0;
+          let diskonText = "Tidak ada diskon";
+
+          // Validasi nomor identitas
+          if (nomorIdentitas.length !== 16) {
+            alert("Isian salah, nomor identitas harus 16 digit");
+            return;
+          }
+
+          // Validasi durasi menginap
+          if (isNaN(durasi)) {
+            alert("Isian salah, durasi menginap harus angka");
+            return;
+          }
+
+          // Tambahkan harga breakfast jika dipilih
+          let hargaFinal = harga;
+          if (breakfast) {
+            hargaFinal += 80000;
+          }
+
+          totalBayar = hargaFinal * durasi;
+
+          // Berikan diskon jika durasi lebih dari 3 hari
+          if (durasi > 3) {
+            diskon = 0.10;
+            totalBayar = totalBayar - totalBayar * diskon;
+            diskonText = "10%";
+          }
+
+          $("#totalBayar").val(totalBayar);
+
+          // Ambil data untuk nota
+          const nama = $("#Nama").val();
+          const jenisKelamin = $("input[name='jenisKelamin']:checked").val();
+          const tipeKamarText = $("#tipeKamar option:selected").text();
+          const tanggalPesan = $("#tanggalpesan").val();
+          const breakfastText = breakfast ? "Ya" : "Tidak";
+
+          // Generate nota
+          const notaContent = `
+            <h2>Nota Pemesanan</h2>
+            <p>Nama Pemesan        : ${nama}</p>
+            <p>Jenis Kelamin       : ${jenisKelamin}</p>
+            <p>Nomor Identitas     : ${nomorIdentitas}</p>
+            <p>Tipe Kamar          : ${tipeKamarText}</p>
+            <p>Durasi Menginap     : ${durasi} hari</p>
+            <p>Termasuk Breakfast  : ${breakfastText}</p>
+            <p>Diskon              : ${diskonText}</p>
+            <p>Total Bayar         : Rp ${totalBayar}</p>
+          `;
+
+          $("#nota").html(notaContent);
+        });
+
+        // Reset form
+        $(".Cancel").click(function () {
+          $("form")[0].reset();
+          $("#nota").html("");
+          $("#harga").val("");
+          $("#totalBayar").val("");
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header-container">
+        <h2>Form Pemesanan</h2>
+      </div>
+      <div class="main-container">
+        <form method="get">
+          <table border="0">
+            <tr>
+              <td><label for="idpesan">Id Pemesan : </label></td>
+              <td>
+                <input type="number" id="IdPesan" name="IdPesan" required />
+              </td>
+            </tr>
+            <tr>
+              <td><label for="namapesan">Nama Pemesan : </label></td>
+              <td><input type="text" id="Nama" name="Nama" required /></td>
+            </tr>
+            <tr>
+              <td><label for="jenisKelamin">Jenis Kelamin : </label></td>
+              <td>
+                <input type="radio" name="jenisKelamin" value="Laki-Laki" />Laki-Laki
+                <input type="radio" name="jenisKelamin" value="Perempuan" />Perempuan
+              </td>
+            </tr>
+            <tr>
+              <td><label for="nomoridentitas">Nomor Identitas : </label></td>
+              <td>
+                <input type="number" id="NomorID" name="NomorID" maxlength="16" required />
+              </td>
+            </tr>
+            <tr>
+              <td><label for="pilihan">Tipe Kamar : </label></td>
+              <td>
+                <select name="Tipe Kamar" id="tipeKamar">
+                  <option value="-" selected>--Pilih--</option>
+                  <option value="1">STANDAR</option>
+                  <option value="2">DELUXE</option>
+                  <option value="3">FAMILY</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td><label for="harga">Harga : </label></td>
+              <td><input type="number" id="harga" name="harga" readonly /></td>
+            </tr>
+            <tr>
+              <td><label for="tanggalpesan">Tanggal Pesan : </label></td>
+              <td>
+                <input type="date" id="tanggalpesan" name="tanggalpesan" required />
+              </td>
+            </tr>
+            <tr>
+              <td><label for="durasimenginap">Durasi Menginap : </label></td>
+              <td>
+                <input type="number" id="durasimenginap" name="durasimenginap" required />
+              </td>
+              <td>Hari</td>
+            </tr>
+            <tr>
+              <td><label for="termasukBreakfast">Termasuk Breakfast : </label></td>
+              <td><input type="checkbox" id="termasukBreakfast" />Ya</td>
+            </tr>
+            <tr>
+              <td><label for="totalBayar">Total Bayar : </label></td>
+              <td>
+                <input type="number" id="totalBayar" name="totalBayar" readonly />
+              </td>
+            </tr>
+          </table>
+          <div class="button">
+            <button type="button" class="Simpan">Simpan</button>
+            <button type="reset" class="Cancel">Batal</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="nota"></div>
+  </body>
+</html>

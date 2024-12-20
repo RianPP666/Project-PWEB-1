@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/Style1.css">
+    <title>Kelola Kamar</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header-container">
+            <h2>Input Data Kamar</h2>
+        </div>
+        <div class="main-container">
+            <form method="post" enctype="multipart/form-data">
+                <table border="0">
+                    <tr>
+                        <td><label for="IdKamar">Id Kamar</label></td>
+                        <td>
+                            <input type="text" id="IdKamar" name="IdKamar" placeholder="Masukkan Id Kamar" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="GambarRuangan">Gambar Ruangan</label></td>
+                        <td>
+                            <input type="file" id="GambarRuangan" name="GambarRuangan" accept="image/*" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="JenisKamar">Jenis Kamar</label></td>
+                        <td>
+                            <select name="JenisKamar" id="JenisKamar" required>
+                                <option value="" selected>--Pilih Jenis Kamar--</option>
+                                <option value="STANDAR">STANDAR</option>
+                                <option value="DELUXE">DELUXE</option>
+                                <option value="FAMILY">FAMILY</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="Harga">Harga</label></td>
+                        <td>
+                            <input type="number" id="Harga" name="Harga" placeholder="Masukkan Harga" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="Fasilitas">Fasilitas</label></td>
+                        <td>
+                            <input type="radio" id="Pre1" name="Fasilitas" value="Pre1" required> Pre1
+                            <input type="radio" id="Pre2" name="Fasilitas" value="Pre2"> Pre2
+                            <input type="radio" id="Pre3" name="Fasilitas" value="Pre3"> Pre3
+                        </td>
+                    </tr>
+                    
+                </table>
+
+                <!-- Tombol Simpan dan Batal -->
+                <div class="button">
+                    <button type="submit" class="Simpan">Simpan</button>
+                    <button type="reset" class="Cancel">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
